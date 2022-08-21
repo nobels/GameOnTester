@@ -47,7 +47,7 @@ OneButton button_Up(GAMEON_UP);
 OneButton button_Down(GAMEON_DOWN);
 OneButton button_Left(GAMEON_LEFT);
 OneButton button_Right(GAMEON_RIGHT);
-OneButton button_Select(GAMEON_SELECT);
+OneButton button_center(GAMEON_BUTTON);
 
 // string convertToenum (int val)
 // {
@@ -77,12 +77,12 @@ void setup() {
     pinMode (GAMEON_A, INPUT_PULLUP);
     pinMode (GAMEON_B, INPUT_PULLUP);
 
-//Todo: Verder uitzoeken waarom deze 2 knoppen niet werken.
+//Todo: Verder uitzoeken waarom deze 2 knoppen (start/select) niet werken.
     //pinMode (GAMEON_SELECT, INPUT);  //→ NEGATIEF
     //pinMode (GAMEON_SELECT, INPUT_PULLDOWN);  //→ NEGATIEF
     //pinMode (GAMEON_SELECT, INPUT_PULLUP); //→ NEGATIEF
 
-    //pinMode (GAMEON_START, INPUT); //→ NEGATIEF
+    pinMode (GAMEON_START, INPUT); //→ NEGATIEF
     //pinMode (GAMEON_START, INPUT_PULLDOWN); //→ NEGATIEF
     //pinMode (GAMEON_START, INPUT_PULLUP);
   
@@ -93,7 +93,7 @@ void setup() {
     pinMode (GAMEON_DOWN, INPUT_PULLUP);
     pinMode (GAMEON_LEFT, INPUT_PULLUP);
     pinMode (GAMEON_RIGHT, INPUT_PULLUP);
-    pinMode (GAMEON_SELECT, INPUT_PULLUP);
+    pinMode (GAMEON_BUTTON, INPUT_PULLUP);
   
   // link the doubleclick function to be called on a doubleclick event.
   button_a.attachDoubleClick(doubleclick);
@@ -107,6 +107,7 @@ void setup() {
   button_select.attachDoubleClick(doubleclick);
   button_select.attachClick(click);
   button_select.attachMultiClick(multiclick);
+  
 
   button_start.attachDoubleClick(doubleclick);
   button_start.attachClick(click);
@@ -136,9 +137,9 @@ void setup() {
   button_Right.attachClick(click);
   button_Right.attachMultiClick(multiclick);
 
-  button_select.attachDoubleClick(doubleclick);
-  button_select.attachClick(click);
-  button_select.attachMultiClick(multiclick);
+  button_center.attachDoubleClick(doubleclick);
+  button_center.attachClick(click);
+  button_center.attachMultiClick(multiclick);
 
 } // setup
   
@@ -155,7 +156,7 @@ void loop() {
   button_Down.tick();
   button_Left.tick();
   button_Right.tick();
-  button_select.tick();
+  button_center.tick();
 
 
   // You can implement other code in here or just wait a while 
