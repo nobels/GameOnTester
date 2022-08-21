@@ -14,10 +14,10 @@
 #define GAMEON_SHOULDERRIGHT 14
 
 enum gebeurtenis { None, SingleClick, DoubleClick, TripleClick };
-
 enum btn {A, B, Start, Select, Omhoog, Omlaag, Links, Rechts, Center, BovenLinks, BovenRechts};
 
-inline const char* NaarText(btn v)
+//enum naar text weergave (enum → string)
+String NaarText(btn v)
 {
     switch (v)
     {
@@ -36,7 +36,7 @@ inline const char* NaarText(btn v)
     }
 }
 
-// Setup a new OneButton on each button.
+// Maak een nieuwe OneButton voor elke knop.
 OneButton button_a(GAMEON_A);
 OneButton button_b(GAMEON_B);
 OneButton button_select(GAMEON_SELECT);
@@ -49,29 +49,25 @@ OneButton button_Left(GAMEON_LEFT);
 OneButton button_Right(GAMEON_RIGHT);
 OneButton button_center(GAMEON_BUTTON);
 
-// string convertToenum (int val)
-// {
-//     string MyStr(enum_string[val]);
-//     return MyStr;
-// }
-
-void click(){
-  Serial.println ( "→ Eenmalige klik gebeurtenis");
-}// single click
+// »»————-　Knop functies　————-««
+void click(btn knop){
+  Serial.println ( "Knop '"+ NaarText(knop) + "' → Eenmalige klik gebeurtenis");
+}
 
 // this function will be called when the button was pressed 2 times in a short timeframe.
-void doubleclick() { //btn knop
-
+void doubleclick(btn knop) { //btn knop
   //Serial.println ( NaarText(knop) + "→ Dubbelklik gebeurtenis");
-  Serial.println ( "→ Dubbelklik gebeurtenis");
-} // doubleclick
+  Serial.println ( "Knop '"+ NaarText(knop) + "' → Dubbelklik gebeurtenis");
+}
 
-void multiclick() {
-  Serial.println ( "→ Multiklik gebeurtenis");
-} // doubleclick
+void multiclick(btn knop) {
+  Serial.println ( "Knop '"+ NaarText(knop) + "' →  Multiklik gebeurtenis");
+}
 
-// setup code here, to run once:
+
+// »»————-　setup code hier, om eenmaal te draaien　————-««
 void setup() {
+  //Serial output weergave
   Serial.begin (9600);
     
     pinMode (GAMEON_A, INPUT_PULLUP);
@@ -95,56 +91,56 @@ void setup() {
     pinMode (GAMEON_RIGHT, INPUT_PULLUP);
     pinMode (GAMEON_BUTTON, INPUT_PULLUP);
   
-  // link the doubleclick function to be called on a doubleclick event.
-  button_a.attachDoubleClick(doubleclick);
-  button_a.attachClick(click);
-  button_a.attachMultiClick(multiclick);
-
-  button_b.attachDoubleClick(doubleclick);
-  button_b.attachClick(click);
-  button_b.attachMultiClick(multiclick);
+// »»————-　Linken van het gedrag aan de knop + parrameter (knopnaam)　————-««
+  button_a.attachClick([] { click(A); });
+  button_a.attachDoubleClick([] { doubleclick(A); });
+  button_a.attachMultiClick([] { multiclick(A); });
   
-  button_select.attachDoubleClick(doubleclick);
-  button_select.attachClick(click);
-  button_select.attachMultiClick(multiclick); 
+  button_b.attachClick([] { click(B); });
+  button_b.attachDoubleClick([] { doubleclick(B); });
+  button_b.attachMultiClick([] { multiclick(B); });
+      
+  button_select.attachClick([] { click(Select); });
+  button_select.attachDoubleClick([] { doubleclick(Select); });
+  button_select.attachMultiClick([] { multiclick(Select); });
 
-  button_start.attachDoubleClick(doubleclick);
-  button_start.attachClick(click);
-  button_start.attachMultiClick(multiclick);
+  button_start.attachClick([] { click(Start); });
+  button_start.attachDoubleClick([] { doubleclick(Start); });
+  button_start.attachMultiClick([] { multiclick(Start); });
 
-  button_ShoulderLeft.attachDoubleClick(doubleclick);
-  button_ShoulderLeft.attachClick(click);
-  button_ShoulderLeft.attachMultiClick(multiclick);
+  button_ShoulderLeft.attachClick([] { click(BovenLinks); });
+  button_ShoulderLeft.attachDoubleClick([] { doubleclick(BovenLinks); });
+  button_ShoulderLeft.attachMultiClick([] { multiclick(BovenLinks); });
 
-  button_shoulderRight.attachDoubleClick(doubleclick);
-  button_shoulderRight.attachClick(click);
-  button_shoulderRight.attachMultiClick(multiclick);
+  button_shoulderRight.attachClick([] { click(BovenRechts); });
+  button_shoulderRight.attachDoubleClick([] { doubleclick(BovenRechts); });
+  button_shoulderRight.attachMultiClick([] { multiclick(BovenRechts); });
 
-  button_Up.attachDoubleClick(doubleclick);
-  button_Up.attachClick(click);
-  button_Up.attachMultiClick(multiclick);
+  button_Up.attachClick([] { click(Omhoog); });
+  button_Up.attachDoubleClick([] { doubleclick(Omhoog); });
+  button_Up.attachMultiClick([] { multiclick(Omhoog); });
 
-  button_Down.attachDoubleClick(doubleclick);
-  button_Down.attachClick(click);
-  button_Down.attachMultiClick(multiclick);
+  button_Down.attachClick([] { click(Omlaag); });
+  button_Down.attachDoubleClick([] { doubleclick(Omlaag); });
+  button_Down.attachMultiClick([] { multiclick(Omlaag); });
 
-  button_Left.attachDoubleClick(doubleclick);
-  button_Left.attachClick(click);
-  button_Left.attachMultiClick(multiclick);
-
-  button_Right.attachDoubleClick(doubleclick);
-  button_Right.attachClick(click);
-  button_Right.attachMultiClick(multiclick);
-
-  button_center.attachDoubleClick(doubleclick);
-  button_center.attachClick(click);
-  button_center.attachMultiClick(multiclick);
-
-} // setup
+  button_Left.attachClick([] { click(Links); });
+  button_Left.attachDoubleClick([] { doubleclick(Links); });
+  button_Left.attachMultiClick([] { multiclick(Links); });
   
-// main code here, to run repeatedly: 
+  button_Right.attachClick([] { click(Rechts); });
+  button_Right.attachDoubleClick([] { doubleclick(Rechts); });
+  button_Right.attachMultiClick([] { multiclick(Rechts); });
+  
+  button_center.attachClick([] { click(Center); });
+  button_center.attachDoubleClick([] { doubleclick(Center); });
+  button_center.attachMultiClick([] { multiclick(Center); });
+
+} 
+  
+// »»————-　hoofdcode hier, om herhaaldelijk te draaien　————-««  
 void loop() {
-  // keep watching the push button_a:
+  // blijf de knoppen controleren
   button_select.tick();
   button_start.tick();
   button_a.tick();
@@ -156,8 +152,6 @@ void loop() {
   button_Left.tick();
   button_Right.tick();
   button_center.tick();
-
-
-  // You can implement other code in here or just wait a while 
+  // Je kunt hier andere code implementeren of gewoon even wachten 
   delay(10);
-} // loop
+} 

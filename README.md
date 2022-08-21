@@ -2,9 +2,8 @@
 
 Gebruikte libraries
 
-* OneButton → https://github.com/mathertel/OneButton
-  (verbetering van het gebruik van een enkele knop voor invoer)
-* 
+* OneButton → https://github.com/mathertel/OneButton (verbetering van het gebruik van drukknoppen)
+  Uitleg van de ontwikkelaar zelf http://www.mathertel.de/Arduino/OneButtonLibrary.aspx
 
 Door het gebruik van de Onebutton hebben we extra functies die we aan een knop kunnen toekennen.
 
