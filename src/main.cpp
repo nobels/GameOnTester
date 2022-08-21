@@ -78,7 +78,7 @@ void setup() {
     pinMode (GAMEON_B, INPUT_PULLUP);
 
 //Todo: Verder uitzoeken waarom deze 2 knoppen (start/select) niet werken.
-    //pinMode (GAMEON_SELECT, INPUT);  //→ NEGATIEF
+    pinMode (GAMEON_SELECT, INPUT);  //→ NEGATIEF
     //pinMode (GAMEON_SELECT, INPUT_PULLDOWN);  //→ NEGATIEF
     //pinMode (GAMEON_SELECT, INPUT_PULLUP); //→ NEGATIEF
 
@@ -106,8 +106,7 @@ void setup() {
   
   button_select.attachDoubleClick(doubleclick);
   button_select.attachClick(click);
-  button_select.attachMultiClick(multiclick);
-  
+  button_select.attachMultiClick(multiclick); 
 
   button_start.attachDoubleClick(doubleclick);
   button_start.attachClick(click);
